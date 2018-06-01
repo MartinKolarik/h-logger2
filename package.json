@@ -1,0 +1,29 @@
+{
+	"name": "h-logger",
+	"description": "A human-friendly logger",
+	"version": "1.0.0",
+	"github": "https://github.com/MartinKolarik/h-logger/",
+	"main": "./src/index.js",
+	"dependencies": {
+		"chalk": "^2.4.1",
+		"date-format": "^1.2.0",
+		"ms": "^2.1.1",
+		"pretty-error": "^2.1.1"
+	},
+	"devDependencies": {
+		"eslint": "^4.19.1"
+	},
+	"author": {
+		"name": "Martin Kolárik",
+		"email": "martin@kolarik.sk",
+		"url": "https://kolarik.sk"
+	},
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/MartinKolarik/h-logger.git"
+	},
+	"bugs": {
+		"url": "https://github.com/MartinKolarik/h-logger/issues"
+	}
+}
