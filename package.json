@@ -1,8 +1,8 @@
 {
-	"name": "h-logger",
+	"name": "h-logger2",
 	"description": "A human-friendly logger",
 	"version": "1.0.0",
-	"github": "https://github.com/MartinKolarik/h-logger/",
+	"github": "https://github.com/MartinKolarik/h-logger2/",
 	"main": "./src/index.js",
 	"dependencies": {
 		"chalk": "^2.4.1",
@@ -21,9 +21,9 @@
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/MartinKolarik/h-logger.git"
+		"url": "https://github.com/MartinKolarik/h-logger2.git"
 	},
 	"bugs": {
-		"url": "https://github.com/MartinKolarik/h-logger/issues"
+		"url": "https://github.com/MartinKolarik/h-logger2/issues"
 	}
 }
