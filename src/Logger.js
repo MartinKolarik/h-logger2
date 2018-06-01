@@ -43,8 +43,12 @@ class Logger {
 		return new Logger(`${this.name}:${name}`, this.writers);
 	}
 
-	serialize (object = {}, serializers = Logger.serializers) {
+	serialize (object, serializers = Logger.serializers) {
 		let result = {};
+
+		if (!object) {
+			return result;
+		}
 
 		Object.keys(object).forEach((key) => {
 			let value = object[key];
