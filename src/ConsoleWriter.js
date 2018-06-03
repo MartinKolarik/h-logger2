@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const PrettyError = require('pretty-error');
 const format = require('date-format');
 const chalk = require('chalk');
@@ -34,7 +35,11 @@ class ConsoleWriter extends Writer {
 	constructor (level, options) {
 		super(level, options);
 		this.diff = new Date();
-		this.inspectOptions = { breakLength: 80, depth: null, maxArrayLength: null, showHidden: true };
+		this.inspectOptions = { breakLength: 80, depth: null, maxArrayLength: null };
+	}
+
+	inspect (object) {
+		return '  ' + util.inspect(object, this.inspectOptions).replace(/\n(.)/g, '\n  $1');
 	}
 
 	write (logger, level, message, error, context) {
@@ -50,14 +55,25 @@ class ConsoleWriter extends Writer {
 
 		if (error) {
 			if (error instanceof Error) {
-				console.log(pe.render(error));
+				if (chalk.supportsColor) {
+					console.log(pe.render(error));
+
+					// Some errors have additional properties that might be useful.
+					let obj = _.omit(error, [ 'name' ]);
+
+					if (Object.keys(obj).length) {
+						console.log(chalk[color](this.inspect(obj)));
+					}
+				} else {
+					console.log(this.inspect(error));
+				}
 			} else {
-				console.log(' ', chalk[color](util.inspect(logger.serialize(error), this.inspectOptions)));
+				console.log(chalk[color](this.inspect(logger.serialize(error))));
 			}
 		}
 
 		if (context) {
-			console.log(' ', util.inspect(logger.serialize(context), this.inspectOptions));
+			console.log(this.inspect(logger.serialize(context)));
 		}
 
 		this.diff = date;
