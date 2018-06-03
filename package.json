@@ -1,7 +1,7 @@
 {
 	"name": "h-logger2",
 	"description": "A human-friendly logger",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"github": "https://github.com/MartinKolarik/h-logger2/",
 	"main": "./src/index.js",
 	"dependencies": {
