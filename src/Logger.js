@@ -53,7 +53,7 @@ class Logger {
 		Object.keys(object).forEach((key) => {
 			let value = object[key];
 
-			if (serializers.hasOwnProperty(key)) {
+			if (Object.prototype.hasOwnProperty.call(serializers, key)) {
 				value = serializers[key](value);
 			}
 
