@@ -50,7 +50,7 @@ class ConsoleWriter extends Writer {
 			chalk.gray(`${process.pid}@${hostname}`), '',
 			chalk.green(logger.name), '',
 			format('yyyy-MM-dd hh:mm:ss', date), '',
-			chalk[color](`${logger.constructor.levelsByValue[level]}:`), chalk[color](message) + (level > logger.constructor.levels.debug ? '' : ` +${ms(date - this.diff)}`),
+			chalk[color](`${logger.constructor.levelsByValue[level]}:`), chalk[color](message) + (level > logger.constructor.levels.debug ? '' : ` +${ms(date - this.diff)}`)
 		);
 
 		if (error) {
@@ -59,7 +59,7 @@ class ConsoleWriter extends Writer {
 					console.log(pe.render(error));
 
 					// Some errors have additional properties that might be useful.
-					let obj = _.omit(error, [ 'name' ]);
+					let obj = _.omit(logger.serialize(error), [ 'name' ]);
 
 					if (Object.keys(obj).length) {
 						console.log(chalk[color](this.inspect(obj)));
