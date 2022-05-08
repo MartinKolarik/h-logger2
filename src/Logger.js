@@ -102,7 +102,18 @@ Logger.serializers = {
 			},
 		};
 	},
+	options (options) {
+		return {
+			method: options.method,
+			url: options.url.href,
+			headers: options.headers,
+		};
+	},
 	req (req) {
+		if (!req.method) {
+			return;
+		}
+
 		return {
 			method: req.method,
 			url: req.originalUrl || req.url,
@@ -111,11 +122,22 @@ Logger.serializers = {
 			remotePort: req.connection.remotePort,
 		};
 	},
+	request (req) {
+		return this.req(req);
+	},
 	res (res) {
 		return {
 			status: res.statusCode,
-			headers: res._header,
+			message: res.statusMessage,
+			headers: res.headers,
+			body: res.body,
 		};
+	},
+	response (res) {
+		return this.res(res);
+	},
+	timings (timings) {
+		return timings.phases;
 	},
 };
 
