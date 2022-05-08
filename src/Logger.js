@@ -21,6 +21,10 @@ class Logger {
 	}
 
 	log (level, message, error = null, context = null) {
+		if (message && typeof message === 'object') {
+			throw new TypeError('The "message" argument must be a string.');
+		}
+
 		if (context === null && !(error instanceof Error)) {
 			context = error;
 			error = null;
