@@ -118,8 +118,8 @@ Logger.serializers = {
 			method: req.method,
 			url: req.originalUrl || req.url,
 			headers: req.headers,
-			remoteAddress: req.connection.remoteAddress,
-			remotePort: req.connection.remotePort,
+			remoteAddress: req.connection?.remoteAddress,
+			remotePort: req.connection?.remotePort,
 		};
 	},
 	request (req) {
