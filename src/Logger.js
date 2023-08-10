@@ -57,7 +57,7 @@ class Logger {
 		Object.keys(object).concat(Object.keys(serializers)).forEach((key) => {
 			let value = object[key];
 
-			if (value && Object.prototype.hasOwnProperty.call(serializers, key)) {
+			if (value && Object.hasOwn(serializers, key)) {
 				value = serializers[key].call(serializers, value);
 			}
 

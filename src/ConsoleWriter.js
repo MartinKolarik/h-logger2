@@ -50,7 +50,7 @@ class ConsoleWriter extends Writer {
 			chalk.gray(`${process.pid}@${hostname}`), '',
 			chalk.green(logger.name), '',
 			format('yyyy-MM-dd hh:mm:ss', date), '',
-			chalk[color](`${logger.constructor.levelsByValue[level]}:`), chalk[color](message) + (level > logger.constructor.levels.debug ? '' : ` +${ms(date - this.diff)}`)
+			chalk[color](`${logger.constructor.levelsByValue[level]}:`), chalk[color](message) + (level > logger.constructor.levels.debug ? '' : ` +${ms(date - this.diff)}`),
 		);
 
 		if (error) {
