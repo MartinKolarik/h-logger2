@@ -1,12 +1,15 @@
-const _ = require('lodash');
-const PrettyError = require('pretty-error');
-const format = require('date-format');
-const chalk = require('chalk');
-const util = require('util');
-const ms = require('ms');
+import util from 'node:util';
+import os from 'node:os';
+import _ from 'lodash';
+import PrettyError from 'pretty-error';
+import format from 'date-format';
+import chalk from 'chalk';
+import ms from 'ms';
 
-const Writer = require('./Writer');
-const hostname = require('os').hostname();
+import Logger, { LogLevelValue } from './Logger.js';
+import Writer from './Writer.js';
+
+const hostname = os.hostname();
 const pe = new PrettyError();
 
 pe.appendStyle({
@@ -32,25 +35,38 @@ if (!chalk.supportsColor) {
 }
 
 class ConsoleWriter extends Writer {
-	constructor (level, options) {
+	private diff: Date;
+	private inspectOptions: util.InspectOptions;
+
+	static colors = {
+		60: 'red',
+		50: 'redBright',
+		40: 'yellowBright',
+		30: 'cyanBright',
+		20: 'blueBright',
+		10: 'magenta',
+	} as const;
+
+	constructor (level: LogLevelValue, options: object = {}) {
 		super(level, options);
 		this.diff = new Date();
 		this.inspectOptions = { breakLength: 80, depth: null, maxArrayLength: null };
 	}
 
-	inspect (object) {
+	private inspect (object: any): string {
 		return '  ' + util.inspect(object, this.inspectOptions).replace(/\n(.)/g, '\n  $1');
 	}
 
-	write (logger, level, message, error, context) {
-		let color = ConsoleWriter.colors[level];
-		let date = new Date();
+	public write (logger: Logger, level: LogLevelValue, message: string, error?: any, context?: any): void {
+		const cons = logger.constructor as unknown as typeof Logger;
+		const color = ConsoleWriter.colors[level];
+		const date = new Date();
 
 		console.log(
 			chalk.gray(`${process.pid}@${hostname}`), '',
 			chalk.green(logger.name), '',
 			format('yyyy-MM-dd hh:mm:ss', date), '',
-			chalk[color](`${logger.constructor.levelsByValue[level]}:`), chalk[color](message) + (level > logger.constructor.levels.debug ? '' : ` +${ms(date - this.diff)}`),
+			chalk[color](`${cons.levelsByValue[level].toUpperCase()}:`), chalk[color](message) + (level > cons.levels.debug ? '' : ` +${ms(date.getTime() - this.diff.getTime())}`),
 		);
 
 		if (error) {
@@ -59,7 +75,7 @@ class ConsoleWriter extends Writer {
 					console.log(pe.render(error));
 
 					// Some errors have additional properties that might be useful.
-					let obj = _.omit(logger.serialize(error), [ 'name' ]);
+					const obj = _.omit(logger.serialize(error), [ 'name' ]);
 
 					if (Object.keys(obj).length) {
 						console.log(chalk[color](this.inspect(obj)));
@@ -80,13 +96,4 @@ class ConsoleWriter extends Writer {
 	}
 }
 
-ConsoleWriter.colors = {
-	60: 'red',
-	50: 'redBright',
-	40: 'yellowBright',
-	30: 'cyanBright',
-	20: 'blueBright',
-	10: 'magenta',
-};
-
-module.exports = ConsoleWriter;
+export default ConsoleWriter;
