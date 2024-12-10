@@ -54,7 +54,7 @@ const redisLogger = logger.scope('redis');
 
 ## Custom writers
 
-A writer is simply a class that implements the [Writer interface](src/Writer.ts). See the [ConsoleWriter](/src/ConsoleWriter.ts) implementation for an example.
+A writer is simply a class that implements the [Writer interface](src/Writer.js). See the [ConsoleWriter](/src/ConsoleWriter.js) implementation for an example.
 
 ## License
 Copyright (c) 2018 Martin Kolárik. Released under the MIT license.
