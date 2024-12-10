@@ -65,7 +65,7 @@ declare class Logger {
 }
 
 declare namespace LoggerNamespace {
-	export { Logger, LogLevelName, LogLevelValue, ConsoleWriter, Writer };
+	export { Logger, ConsoleWriter, Writer };
 }
 
 declare const LoggerDefaultExport: typeof Logger & typeof LoggerNamespace;
