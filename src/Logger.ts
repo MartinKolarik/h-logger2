@@ -147,5 +147,5 @@ class Logger {
 }
 
 export default Logger;
-export type LogLevelName = typeof Logger.levels;
+export type LogLevelName = keyof typeof Logger.levels;
 export type LogLevelValue = keyof typeof Logger.levelsByValue;
