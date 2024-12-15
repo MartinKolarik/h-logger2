@@ -32,7 +32,7 @@ if (!chalk.supportsColor) {
 }
 
 class ConsoleWriter extends Writer {
-	constructor (level, options) {
+	constructor (level, options = {}) {
 		super(level, options);
 		this.diff = new Date();
 		this.inspectOptions = { breakLength: 80, depth: null, maxArrayLength: null, ...options.inspectOptions || {} };
