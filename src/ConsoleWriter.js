@@ -35,7 +35,7 @@ class ConsoleWriter extends Writer {
 	constructor (level, options) {
 		super(level, options);
 		this.diff = new Date();
-		this.inspectOptions = { breakLength: 80, depth: null, maxArrayLength: null };
+		this.inspectOptions = { breakLength: 80, depth: null, maxArrayLength: null, ...options.inspectOptions || {} };
 	}
 
 	inspect (object) {
