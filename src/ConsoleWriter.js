@@ -48,8 +48,8 @@ class ConsoleWriter extends Writer {
 
 		console.log(
 			chalk.gray(`${process.pid}@${hostname}`), '',
-			chalk.green(logger.name), '',
 			format('yyyy-MM-dd hh:mm:ss', date), '',
+			chalk.green(logger.name), '',
 			chalk[color](`${logger.constructor.levelsByValue[level]}:`), chalk[color](message) + (level > logger.constructor.levels.debug ? '' : ` +${ms(date - this.diff)}`),
 		);
 
