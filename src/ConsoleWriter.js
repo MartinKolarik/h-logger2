@@ -47,10 +47,14 @@ class ConsoleWriter extends Writer {
 		let date = new Date();
 
 		console.log(
-			chalk.gray(`${process.pid}@${hostname}`), '',
-			format('yyyy-MM-dd hh:mm:ss', date), '',
-			chalk.green(logger.name), '',
-			chalk[color](`${logger.constructor.levelsByValue[level]}:`), chalk[color](message) + (level > logger.constructor.levels.debug ? '' : ` +${ms(date - this.diff)}`),
+			chalk.gray(`${process.pid}@${hostname}`),
+			'',
+			format('yyyy-MM-dd hh:mm:ss', date),
+			'',
+			chalk.green(logger.name),
+			'',
+			chalk[color](`${logger.constructor.levelsByValue[level]}:`),
+			chalk[color](message) + (level > logger.constructor.levels.debug ? '' : ` +${ms(date - this.diff)}`),
 		);
 
 		if (error) {
