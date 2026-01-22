@@ -19,7 +19,7 @@ const Logger = require('h-logger2');
 
 // ConsoleWriter is available directly in this module,
 // other output/transfer methods may be implemented as separate modules
-const logger = new Logger('my-app-name', [ new Logger.ConsoleWriter(Logger.TRACE) ]);
+const logger = new Logger('my-app-name', [ new Logger.ConsoleWriter(Logger.levels.trace) ]);
 
 // simple text message
 logger.trace('message');
